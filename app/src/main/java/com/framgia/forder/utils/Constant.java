@@ -18,6 +18,10 @@ public final class Constant {
 
     public static final int DEFAULT_QUANTITY = 1;
 
+    public static final int HEAD = 0;
+
+    public static final int CONTENT = 1;
+
     private Constant() {
         // No-op
     }
