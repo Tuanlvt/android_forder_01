@@ -1,6 +1,7 @@
 package com.framgia.forder.screen.productdetail;
 
 import com.framgia.forder.data.model.Product;
+import com.framgia.forder.data.model.User;
 import com.framgia.forder.data.source.DomainRepository;
 import com.framgia.forder.data.source.ProductRepository;
 import com.framgia.forder.data.source.remote.api.error.BaseException;
@@ -67,6 +68,25 @@ final class ProductDetailPresenter implements ProductDetailContract.Presenter {
                     @Override
                     public void onSafetyError(BaseException error) {
                         mViewModel.onGetListProductShopError(error);
+                    }
+                });
+        mCompositeSubscription.add(subscription);
+    }
+
+    @Override
+    public void getListCommentInProduct(int productId) {
+        Subscription subscription = mProductRepository.getListCommentInProduct(productId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Action1<List<User>>() {
+                    @Override
+                    public void call(List<User> users) {
+                        mViewModel.onGetListCommentInProductSusscess(users);
+                    }
+                }, new SafetyError() {
+                    @Override
+                    public void onSafetyError(BaseException error) {
+                        mViewModel.onGetListCommentInProductError(error);
                     }
                 });
         mCompositeSubscription.add(subscription);
