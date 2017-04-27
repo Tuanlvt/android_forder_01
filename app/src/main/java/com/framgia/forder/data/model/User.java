@@ -22,7 +22,7 @@ public class User implements Parcelable {
     private String mEmail;
     @SerializedName("avatar")
     @Expose
-    private Image mAvatar;
+    private CollectionAvatar mAvatar;
     @SerializedName("authentication_token")
     @Expose
     private String mToken;
@@ -41,6 +41,12 @@ public class User implements Parcelable {
     @Expose
     private String mDescription;
 
+    @SerializedName("comment")
+    @Expose
+    private String mComment;
+    @Expose
+    @SerializedName("product_id")
+    private int mProductId;
     protected User(Parcel in) {
         mName = in.readString();
         mEmail = in.readString();
@@ -50,12 +56,25 @@ public class User implements Parcelable {
         mUpdatedAt = in.readString();
         mChatworkId = in.readString();
         mDescription = in.readString();
+        mProductId = in.readInt();
     }
 
     public User(Integer id, String name, String email) {
         mId = id;
         mName = name;
         mEmail = email;
+    }
+
+    public User(String name, String comment) {
+        mName = name;
+        mComment = comment;
+    }
+
+    public User(Integer id, String name, String comment, int productId) {
+        mId = id;
+        mName = name;
+        mComment = comment;
+        mProductId = productId;
     }
 
     @Override
@@ -68,6 +87,7 @@ public class User implements Parcelable {
         dest.writeString(mUpdatedAt);
         dest.writeString(mChatworkId);
         dest.writeString(mDescription);
+        dest.writeInt(mProductId);
     }
 
     @Override
@@ -111,11 +131,11 @@ public class User implements Parcelable {
         mEmail = email;
     }
 
-    public Image getAvatar() {
+    public CollectionAvatar getAvatar() {
         return mAvatar;
     }
 
-    public void setAvatar(Image avatar) {
+    public void setAvatar(CollectionAvatar avatar) {
         mAvatar = avatar;
     }
 
@@ -162,5 +182,21 @@ public class User implements Parcelable {
     public String getFormatDate() {
         return Utils.DateTimeUntils.convertUiFormatToDataFormat(mCreatedAt, Utils.INPUT_TIME_FORMAT,
                 Utils.OUTPUT_DATE_FORMAT);
+    }
+
+    public String getComment() {
+        return mComment;
+    }
+
+    public void setComment(String comment) {
+        mComment = comment;
+    }
+
+    public int getProductId() {
+        return mProductId;
+    }
+
+    public void setProductId(int productId) {
+        mProductId = productId;
     }
 }
