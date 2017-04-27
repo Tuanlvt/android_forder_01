@@ -67,7 +67,6 @@
                     android:textColor="@color/color_black"
                     />
             </RelativeLayout>
-
         </LinearLayout>
     </android.support.v7.widget.CardView>
 </layout>

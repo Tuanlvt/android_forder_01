@@ -1,11 +1,13 @@
 package com.framgia.forder.screen.productdetail;
 
+import android.text.TextUtils;
 import com.framgia.forder.data.model.Product;
 import com.framgia.forder.data.model.User;
 import com.framgia.forder.data.source.DomainRepository;
 import com.framgia.forder.data.source.ProductRepository;
 import com.framgia.forder.data.source.remote.api.error.BaseException;
 import com.framgia.forder.data.source.remote.api.error.SafetyError;
+import com.framgia.forder.data.source.remote.api.request.CommentRequest;
 import java.util.List;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
@@ -90,6 +92,34 @@ final class ProductDetailPresenter implements ProductDetailContract.Presenter {
                     }
                 });
         mCompositeSubscription.add(subscription);
+    }
+
+    @Override
+    public void sendComment(CommentRequest request) {
+        if (TextUtils.isEmpty("")) {
+            //Todo Dialog Message Send Comment Error!
+            return;
+        }
+        Subscription subscription = mProductRepository.sendComment(request)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Action1<User>() {
+                    @Override
+                    public void call(User request) {
+                        mViewModel.onCommentSuccess();
+                    }
+                }, new Action1<Throwable>() {
+                    @Override
+                    public void call(Throwable throwable) {
+                        mViewModel.onCommentError();
+                    }
+                });
+        mCompositeSubscription.add(subscription);
+    }
+
+    @Override
+    public boolean validateDataInput(CommentRequest request) {
+        return false;
     }
 
     @Override

@@ -28,6 +28,9 @@ public class CommentRequest extends BaseRequest {
         mComment = comment;
     }
 
+    public CommentRequest() {
+    }
+
     public int getIdProduct() {
         return mIdProduct;
     }

@@ -6,6 +6,7 @@ import com.framgia.forder.R;
 import com.framgia.forder.data.model.Product;
 import com.framgia.forder.data.model.User;
 import com.framgia.forder.data.source.remote.api.error.BaseException;
+import com.framgia.forder.data.source.remote.api.request.CommentRequest;
 import com.framgia.forder.screen.BaseRecyclerViewAdapter;
 import com.framgia.forder.screen.listProduct.ListProductFragment;
 import com.framgia.forder.screen.productdetail.adapter.CommentAdapter;
@@ -28,6 +29,7 @@ public class ProductDetailViewModel extends BaseObservable
     private Navigator mNavigator;
     private ProductShopAdapter mProductShopAdapter;
     private CommentAdapter mCommentInProductAdapter;
+    private CommentRequest mCommentRequest;
 
     public ProductDetailViewModel(Product product, ProductShopAdapter productShopAdapter,
             CommentAdapter commentInProductAdapter, Navigator navigator) {
@@ -35,6 +37,7 @@ public class ProductDetailViewModel extends BaseObservable
         mNavigator = navigator;
         mProductShopAdapter = productShopAdapter;
         mCommentInProductAdapter = commentInProductAdapter;
+        mCommentRequest = new CommentRequest();
         mProductShopAdapter.setItemClickListener(this);
     }
 
@@ -178,8 +181,21 @@ public class ProductDetailViewModel extends BaseObservable
         mPresenter.addToCart(mProduct);
     }
 
+    @Override
+    public void onCommentSuccess() {
+        // Todo show dialog message
+    }
+
+    @Override
+    public void onCommentError() {
+        // Todo show dialog message
+    }
+
     public void onClickSendComment() {
-        //Todo send Comment
+        if (!mPresenter.validateDataInput(mCommentRequest)) {
+            return;
+        }
+        mPresenter.sendComment(mCommentRequest);
     }
 
     public ProductShopAdapter getProductShopAdapter() {
