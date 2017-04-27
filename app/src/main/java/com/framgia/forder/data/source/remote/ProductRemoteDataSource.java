@@ -1,11 +1,14 @@
 package com.framgia.forder.data.source.remote;
 
 import com.framgia.forder.data.model.Product;
+import com.framgia.forder.data.model.User;
 import com.framgia.forder.data.source.ProductDataSource;
+import com.framgia.forder.data.source.remote.api.request.CommentRequest;
 import com.framgia.forder.data.source.remote.api.request.OrderRequest;
 import com.framgia.forder.data.source.remote.api.response.OrderResponse;
 import com.framgia.forder.data.source.remote.api.response.ProductResponse;
 import com.framgia.forder.data.source.remote.api.service.FOrderApi;
+import java.util.ArrayList;
 import java.util.List;
 import rx.Observable;
 import rx.functions.Func1;
@@ -61,5 +64,27 @@ public class ProductRemoteDataSource extends BaseRemoteDataSource
                         return Observable.error(new NullPointerException());
                     }
                 });
+    }
+
+    @Override
+    public Observable<List<User>> getListCommentInProduct(int productId, int domainId) {
+        List<User> users = new ArrayList<>();
+        users.add(new User("Trần Đức Quốc", "Rất ngon"));
+        users.add(new User("Trần Minh Trí", "Cơm ngon hơn!"));
+        users.add(new User("Nguyễn Phúc Huy", "Thích bánh mỳ hơn!"));
+        users.add(new User("Nguyễn Tiến Vinh", "Phở ngon"));
+        users.add(new User("Trần Đức Quốc", "Rất ngon"));
+        users.add(new User("Trần Đức Quốc", "Rất ngon"));
+        users.add(new User("Trần Minh Trí", "Cơm ngon hơn!"));
+        users.add(new User("Nguyễn Phúc Huy", "Thích bánh mỳ hơn!"));
+        users.add(new User("Nguyễn Tiến Vinh", "Phở ngon"));
+        return Observable.just(users);
+    }
+
+    @Override
+    public Observable<User> sendComment(CommentRequest request) {
+        User user = new User(request.getIdProduct(), request.getNameUser(), request.getComment(),
+                request.getIdProduct());
+        return Observable.just(user);
     }
 }

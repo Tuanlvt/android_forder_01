@@ -61,4 +61,8 @@ public interface FOrderApi {
 
     @POST("v1/orders/")
     Observable<OrderResponse> orderRequest(@Body OrderRequest orderRequest);
+
+    @GET("v1/products")
+    Observable<ProductResponse> getListCommentInProduct(@Query("product_id") int productId,
+            @Query("domain_id") int id);
 }
