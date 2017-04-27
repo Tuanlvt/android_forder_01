@@ -1,7 +1,9 @@
 package com.framgia.forder.screen.productdetail;
 
 import com.framgia.forder.data.model.Product;
+import com.framgia.forder.data.model.User;
 import com.framgia.forder.data.source.remote.api.error.BaseException;
+import com.framgia.forder.data.source.remote.api.request.CommentRequest;
 import com.framgia.forder.screen.BasePresenter;
 import com.framgia.forder.screen.BaseViewModel;
 import java.util.List;
@@ -18,11 +20,19 @@ interface ProductDetailContract {
 
         void onGetListProductShopSuccess(List<Product> products);
 
+        void onGetListCommentInProductError(BaseException exception);
+
+        void onGetListCommentInProductSusscess(List<User> users);
+
         void onAddToCartError(BaseException exception);
 
         void onAddToCartSuccess();
 
         void onAddToCart();
+
+        void onCommentSuccess();
+
+        void onCommentError();
     }
 
     /**
@@ -32,5 +42,11 @@ interface ProductDetailContract {
         void addToCart(Product product);
 
         void getListProductInShop(int shopId);
+
+        void getListCommentInProduct(int productId);
+
+        void sendComment(CommentRequest request);
+
+        boolean validateDataInput(CommentRequest request);
     }
 }
