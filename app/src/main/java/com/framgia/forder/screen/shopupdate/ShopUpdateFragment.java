@@ -34,7 +34,8 @@ public class ShopUpdateFragment extends Fragment {
             @Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Navigator navigator = new Navigator(getParentFragment());
-        mViewModel = new ShopUpdateViewModel(navigator);
+        ShopManagement shopManagement = (ShopManagement) getArguments().get(EXTRA_SHOP_UPDATE);
+        mViewModel = new ShopUpdateViewModel(navigator, shopManagement);
 
         ShopUpdateContract.Presenter presenter = new ShopUpdatePresenter(mViewModel);
         mViewModel.setPresenter(presenter);
