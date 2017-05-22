@@ -45,6 +45,8 @@
                     android:drawableLeft="@drawable/ic_store_24dp"
                     android:drawablePadding="@dimen/dp_10"
                     android:drawableStart="@drawable/ic_store_24dp"
+                    android:text="@{viewModel.shopName}"
+                    android:textColor="@color/black"
                     tools:ignore="TextFields"
                     />
                 <EditText
@@ -54,6 +56,8 @@
                     android:drawableLeft="@drawable/ic_description_note"
                     android:drawablePadding="@dimen/dp_10"
                     android:drawableStart="@drawable/ic_description_note"
+                    android:hint="@string/description"
+                    android:text="@{viewModel.shopDescription}"
                     tools:ignore="TextFields"
                     />
                 <LinearLayout
@@ -87,6 +91,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:gravity="center_vertical"
+                                android:text="@={viewModel.openTime}"
                                 android:textStyle="bold"
                                 />
                             <Button
@@ -94,42 +99,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentEnd="true"
                                 android:layout_alignParentRight="true"
-                                android:text="@string/choose_time"
-                                tools:ignore="RelativeOverlap"
-                                />
-                        </RelativeLayout>
-                    </LinearLayout>
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/dp_40"
-                        android:orientation="horizontal"
-                        >
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:drawableLeft="@drawable/ic_time"
-                            android:drawableStart="@drawable/ic_time"
-                            android:gravity="center_vertical"
-                            android:text="@string/time_auto_close"
-                            android:textColor="@color/black"
-                            android:textStyle="bold"
-                            />
-                        <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="@dimen/dp_40"
-                            >
-                            <!--Time Shop Open-->
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:gravity="center_vertical"
-                                android:textStyle="bold"
-                                />
-                            <Button
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_alignParentEnd="true"
-                                android:layout_alignParentRight="true"
+                                android:onClick="@{() -> viewModel.onClickChooseOpenTime()}"
                                 android:text="@string/choose_time"
                                 tools:ignore="RelativeOverlap"
                                 />
@@ -180,7 +150,7 @@
                             android:layout_marginLeft="@dimen/dp_30"
                             android:layout_marginStart="@dimen/dp_30"
                             android:gravity="center_vertical"
-                            android:text="@string/accepted"
+                            android:text="@={viewModel.autoRejectTime}"
                             android:textStyle="bold"
                             />
                         <Button
@@ -188,6 +158,7 @@
                             android:layout_height="wrap_content"
                             android:layout_alignParentEnd="true"
                             android:layout_alignParentRight="true"
+                            android:onClick="@{() -> viewModel.onClickChooseTimeRefused()}"
                             android:text="@string/choose_time"
                             tools:ignore="RelativeOverlap"
                             />
@@ -215,6 +186,7 @@
                         android:orientation="horizontal"
                         >
                         <ImageView
+                            android:id="@+id/imageView2"
                             android:layout_width="@dimen/dp_130"
                             android:layout_height="@dimen/dp_130"
                             android:layout_gravity="center"
@@ -222,6 +194,8 @@
                             android:layout_marginStart="@dimen/dp_20"
                             android:background="@drawable/border_comment"
                             android:contentDescription="@string/avatar"
+                            android:scaleType="fitXY"
+                            app:imageUrl="@{viewModel.shopAvatar}"
                             />
                         <ImageButton
                             android:layout_width="wrap_content"
@@ -261,6 +235,8 @@
                             android:layout_gravity="center"
                             android:background="@drawable/border_comment"
                             android:contentDescription="@string/cover_image"
+                            android:scaleType="fitXY"
+                            app:imageUrl="@{viewModel.shopImage}"
                             />
                         <ImageButton
                             android:layout_width="wrap_content"
