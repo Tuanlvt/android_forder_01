@@ -35,7 +35,7 @@ public class ShopUpdateFragment extends Fragment {
         super.onCreate(savedInstanceState);
         Navigator navigator = new Navigator(getParentFragment());
         ShopManagement shopManagement = (ShopManagement) getArguments().get(EXTRA_SHOP_UPDATE);
-        mViewModel = new ShopUpdateViewModel(navigator, shopManagement);
+        mViewModel = new ShopUpdateViewModel(navigator,getActivity(), shopManagement);
 
         ShopUpdateContract.Presenter presenter = new ShopUpdatePresenter(mViewModel);
         mViewModel.setPresenter(presenter);
