@@ -1,5 +1,6 @@
 package com.framgia.forder.data.model;
 
+import android.annotation.SuppressLint;
 import com.framgia.forder.utils.OrderStatusCode;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -12,6 +13,12 @@ public class Order {
     @Expose
     @SerializedName("id")
     private int mId;
+    @Expose
+    @SerializedName("user_id")
+    private int mUserId;
+    @Expose
+    @SerializedName("shop_id")
+    private int mShopId;
     @OrderStatusCode
     private int mStatus;
     @Expose
@@ -24,13 +31,16 @@ public class Order {
     @SerializedName("total_pay")
     private double mTotalPay;
     @Expose
+    @SerializedName("created_at")
+    private String mTimeCreateOrder;
+    @Expose
     @SerializedName("user")
     private User mUser;
     @Expose
     @SerializedName("shop")
     private Shop mShop;
     @Expose
-    @SerializedName("order_detail")
+    @SerializedName("order_products")
     private List<OrderDetail> mOrderDetails;
 
     public int getId() {
@@ -74,6 +84,30 @@ public class Order {
         mUser = user;
     }
 
+    public String getTimeCreateOrder() {
+        return mTimeCreateOrder;
+    }
+
+    public void setTimeCreateOrder(String timeCreateOrder) {
+        mTimeCreateOrder = timeCreateOrder;
+    }
+
+    public int getUserId() {
+        return mUserId;
+    }
+
+    public void setUserId(int userId) {
+        mUserId = userId;
+    }
+
+    public int getShopId() {
+        return mShopId;
+    }
+
+    public void setShopId(int shopId) {
+        mShopId = shopId;
+    }
+
     public Shop getShop() {
         return mShop;
     }
@@ -98,6 +132,7 @@ public class Order {
         mOrderDetails = orderDetails;
     }
 
+    @SuppressLint("DefaultLocale")
     public String getFormatTotalPrice() {
         return String.format(FORMAT_PRICE, mTotalPay) + UNIT_MONEY;
     }
