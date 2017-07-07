@@ -74,7 +74,7 @@ public class ListShopViewModel extends BaseObservable implements ListShopContrac
         }
         Shop shop = (Shop) item;
         mNavigator.goNextChildFragment(R.id.layout_content, ShopDetailFragment.newInstance(shop),
-                true, Navigator.LEFT_RIGHT, TAG);
+                true, Navigator.RIGHT_LEFT, TAG);
     }
 
     public ListShopAdapter getAdapter() {

@@ -3,6 +3,9 @@ package com.framgia.forder.screen.shopmanagement;
 import com.framgia.forder.data.model.ShopManagement;
 import com.framgia.forder.screen.BaseRecyclerViewAdapter;
 
+import static com.framgia.forder.utils.Constant.STATUS_OFF;
+import static com.framgia.forder.utils.Constant.STATUS_ON;
+
 /**
  * Created by levutantuan on 5/3/17.
  */
@@ -58,15 +61,12 @@ public class ItemShopManagementViewModel {
     }
 
     public void checked() {
-        //Todo edit later
-        //        if (mStatusShop) {
-        //            mChangeStatusShopManagement.onChangeStatusShop(mShopManagement.getShop()
-        // .getId(),
-        //                    STATUS_OFF);
-        //        } else {
-        //            mChangeStatusShopManagement.onChangeStatusShop(mShopManagement.getShop()
-        // .getId(),
-        //                    STATUS_ON);
-        //        }
+        if (mStatusShop) {
+            mChangeStatusShopManagement.onChangeStatusShop(mShopManagement.getShop().getId(),
+                    STATUS_OFF);
+        } else {
+            mChangeStatusShopManagement.onChangeStatusShop(mShopManagement.getShop().getId(),
+                    STATUS_ON);
+        }
     }
 }
